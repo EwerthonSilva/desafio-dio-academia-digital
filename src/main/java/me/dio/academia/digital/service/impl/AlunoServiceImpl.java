@@ -64,7 +64,8 @@ public class AlunoServiceImpl implements IAlunoService {
         return alunoRepository.findByDataDeNascimento(data);
     }
 
-    public List<AvaliacaoFisica> getAllAvaliacaoFisicaId(Long id) {
-        return avaliacaoFisicaRepository.findAll();
+    public List<AvaliacaoFisica> getAllAvaliacaoFisicaPorAlunoId(Long alunoId) {
+        Aluno aluno = alunoRepository.findById(alunoId).get();
+        return avaliacaoFisicaRepository.findByAluno(aluno);
     }
 }

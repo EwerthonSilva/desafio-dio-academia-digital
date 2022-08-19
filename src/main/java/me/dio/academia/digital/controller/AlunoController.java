@@ -6,11 +6,9 @@ import me.dio.academia.digital.entity.form.AlunoForm;
 import me.dio.academia.digital.entity.form.AlunoUpdateForm;
 import me.dio.academia.digital.service.impl.AlunoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -37,13 +35,18 @@ public class AlunoController {
     }
 
     @GetMapping("/avaliacoes/{id}")
-    public List<AvaliacaoFisica> getAllAvaliacaoFisicaPorId(@PathVariable Long id){
-        return service.getAllAvaliacaoFisicaId(id);
-    }
+    public List<AvaliacaoFisica> getAllAvaliacaoFisicaPorAlunoId(@PathVariable Long alunoId){
 
+        return service.getAllAvaliacaoFisicaPorAlunoId(alunoId);
+    }
 
     @GetMapping("/filtro")
     public List<Aluno> filtrarAlunosPorDataDeAniversario(@RequestParam(value = "dataDeNascimento", required = true) String dataDeNascimento){
         return service.filtrarAlunosPorDataDeNascimento(dataDeNascimento);
+    }
+
+    @DeleteMapping("{id}")
+    public void deleteAluno(@PathVariable Long id){
+        service.delete(id);
     }
 }
